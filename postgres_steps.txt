@@ -33,6 +33,10 @@ Press enter on display name
 
 NOW a little elephant should be on the left side of our terminal, you should be able to open it up and see our tables now! Just right click the table to show the queries from there
 
-
-
+Now make sure to run the flask init steps (delete migrations if it exists)
+export FLASK_APP=app.py
+export FLASK_RUN_PORT=5555
+flask db init
+flask db migrate -m 'Create tables' 
+flask db upgrade 
 

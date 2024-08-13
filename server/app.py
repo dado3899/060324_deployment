@@ -24,7 +24,7 @@ class SaveSession(Resource):
         print(data)
         return {}
 
-api.add_resource(SaveSession,'/session')
+api.add_resource(SaveSession,'/api/session')
 
 # How can use this for user login?
 
@@ -32,6 +32,7 @@ api.add_resource(SaveSession,'/session')
 # Save it to session
 class Login(Resource):
     def post(self):
+        print("here")
         data = request.get_json()
         user = User.query.filter(User.username == data['username']).first()
         if user and user.authenticate(data['password']):
@@ -40,16 +41,17 @@ class Login(Resource):
             return user.to_dict()
         else:
             return {"Error": "Not valid user"},400
-api.add_resource(Login,'/login')
+api.add_resource(Login,'/api/login')
 
 class Logout(Resource):
     def delete(self):
         session['user_id'] = None
         return {}
-api.add_resource(Logout,'/logout')
+api.add_resource(Logout,'/api/logout')
 
 class Signup(Resource):
     def post(self):
+        
         try:
             data = request.get_json()
             user = User( username = data['username'], password_hash = data['password'])
@@ -61,7 +63,7 @@ class Signup(Resource):
         except Exception as e:
             print(e)
             return {"Error":"Can't signup"},400
-api.add_resource(Signup,'/signup')
+api.add_resource(Signup,'/api/signup')
 
 class CheckSession(Resource):
     def get(self):
@@ -71,7 +73,7 @@ class CheckSession(Resource):
             return user.to_dict()
         else:
             return {},404
-api.add_resource(CheckSession,'/checksessions')
+api.add_resource(CheckSession,'/api/checksessions')
 # Create a logout route now! set session to None
 
 
@@ -92,7 +94,7 @@ class All_Blogs(Resource):
         blogs = Blog.query.all()
         return [blog.to_dict() for blog in blogs]
 
-api.add_resource(All_Blogs, '/blogs')
+api.add_resource(All_Blogs, '/api/blogs')
 
 @app.errorhandler(404)
 def not_found(e):
