@@ -36,8 +36,8 @@ class Login(Resource):
         data = request.get_json()
         user = User.query.filter(User.username == data['username']).first()
         if user and user.authenticate(data['password']):
-            # if data['stayLoggedIn']:
-            session['user_id'] = user.id
+            if data['stayLoggedIn']:
+                session['user_id'] = user.id
             return user.to_dict()
         else:
             return {"Error": "Not valid user"},400
