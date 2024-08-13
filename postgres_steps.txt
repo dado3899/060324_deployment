@@ -1,0 +1,38 @@
+Set up postgres a postgres server on Render (see Deployment in phase 4)
+
+Download the extension:
+PostgresSQL by ChrisKolkman
+
+Run command+shift+p (or ctrl+shift+p on windows)
+type 'PostgreSQL: Add Connection' and enter
+
+open up our Render postgressql page and scroll to connection:
+
+Host name: 
+This should be the url in our external database url between a. and /database_name
+SO given 
+postgres://test_postgres_d1zz_user:nfjklanlajfnjlnafdsas@gnjfkadsgnjalsndagsnjk-a.oregon-postgres.render.com/test_postgres_d1zz
+We would use **oregon-postgres.render.com**
+postgresql://db_060324_postgres_user:PoA6JNMHwnxWbNLqctvgF3kdnQHY6ZSA@dpg-cqtojejv2p9s73dl127g-a.oregon-postgres.render.com/db_060324_postgres
+
+Postgres User to authenticate:
+Username on our render database
+
+Password:
+Password on our render database
+
+Port:
+Port on our render database
+
+Use secure connection
+
+[optional] database to connect to:
+Database on our render database
+
+Press enter on display name
+
+NOW a little elephant should be on the left side of our terminal, you should be able to open it up and see our tables now! Just right click the table to show the queries from there
+
+
+
+

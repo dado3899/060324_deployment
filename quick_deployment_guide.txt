@@ -1,0 +1,39 @@
+BEFORE DEPLOY:
+Create a posgressql on render
+
+1. Make sure the project works locally (Optional use Honcho to start under one command)
+2. Create a build version of our app
+3. Update our backend to include:
+NOTE: The following will be changed based on using cra as well as file structure
+app = Flask(
+    __name__,
+    static_url_path='',
+    static_folder='../client/build',
+    template_folder='../client/build'
+)
+and
+NOTE save the postgres url to the .env!
+app.config['SQLALCHEMY_DATABASE_URI']=postgresql://{retrieve this from from render, external database}
+and
+(import render_template from flask)
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("index.html")
+
+4. Make sure to install gunicorn and psycopg2-binary to our pipfile
+5. Test a local build version using
+gunicorn --chdir server app:app
+6. Create a requirements file (for your backend, this should exist in the server folder)
+pipenv requirements > requirements.txt
+7. Connect github to render
+8. Change the build command to:
+
+pip install -r /server/requirements.txt && npm install --prefix client && npm run build --prefix client
+
+And the start command to:
+
+gunicorn --chdir server app:app
+
+9. Add the following and any additional .env variables to the environment
+DATABASE_URI=postgresql://{retrieve this from from render}
+PYTHON_VERSION=3.8.13
